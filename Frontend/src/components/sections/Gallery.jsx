@@ -1,0 +1,29 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+
+const images = [
+  'https://images.unsplash.com/photo-1519741497674-611481863552',
+  'https://images.unsplash.com/photo-1511795409834-ef04bbd61622',
+  'https://images.unsplash.com/photo-1583939003579-730e3918a45a',
+  'https://images.unsplash.com/photo-1583939003579-730e3918a45a',
+];
+
+export default function Gallery() {
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2 p-2 bg-white">
+      {images.map((src, index) => (
+        <motion.div 
+          key={index}
+          whileHover={{ scale: 0.98 }}
+          className="aspect-square overflow-hidden cursor-pointer"
+        >
+          <img 
+            src={`${src}?auto=format&fit=crop&w=600&q=80`} 
+            alt="Wedding Moment" 
+            className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+          />
+        </motion.div>
+      ))}
+    </div>
+  );
+}

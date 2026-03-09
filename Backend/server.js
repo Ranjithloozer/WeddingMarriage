@@ -1,11 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const path = require('path'); // Added for path handling
+const path = require('path'); 
 const connectDB = require('./config/db');
 
 dotenv.config();
-connectDB(); 
+connectDB(); // Connects to your MongoDB Atlas
 
 const app = express();
 
@@ -18,12 +18,12 @@ const rsvpRoutes = require('./routes/rsvp');
 app.use('/api/rsvp', rsvpRoutes);
 
 // 2. Serve Static Files (Production Logic)
-// This points to the 'build' or 'dist' folder created by React
-const frontendBuildPath = path.join(__dirname, '../build'); 
+// Since the 'build' folder is now INSIDE the Backend folder
+const frontendBuildPath = path.join(__dirname, 'build'); 
 app.use(express.static(frontendBuildPath));
 
 // 3. Client-Side Routing Fix
-// Ensures that refreshing the page on /story or /rsvp doesn't 404
+// This ensures your wedding site pages don't 404 on refresh
 app.get('*', (req, res) => {
     res.sendFile(path.join(frontendBuildPath, 'index.html'));
 });

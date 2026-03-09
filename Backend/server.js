@@ -24,10 +24,9 @@ app.use(express.static(frontendBuildPath));
 
 // 3. Client-Side Routing Fix
 // This ensures your wedding site pages don't 404 on refresh
-app.get('(.*)', (req, res) => {
+app.get('/:any*', (req, res) => {
     res.sendFile(path.join(frontendBuildPath, 'index.html'));
 });
-
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);

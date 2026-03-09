@@ -37,12 +37,12 @@ function App() {
   // Handle successful RSVP submission to Backend (MongoDB Atlas)
   const handleRSVPSuccess = async (formData) => {
     try {
-     const response = await fetch('https://wedding-backend.onrender.com/api/rsvp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+      // Use a relative path so it works on any URL (Render or Local)
+      const response = await fetch('/api/rsvp', { 
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify(formData),
       });
-
       if (response.ok) {
         const data = await response.json();
         setSubmittedData(data); 
